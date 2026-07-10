@@ -1,0 +1,22 @@
+{
+  "name": "backend-microservices",
+  "version": "1.0.0",
+  "description": "Microservices backend for Interview Prep application",
+  "scripts": {
+    "install-all": "cd api-gateway && npm install && cd ../auth-service && npm install && cd ../user-service && npm install && cd ../interview-service && npm install",
+    "start-gateway": "cd api-gateway && npm start",
+    "start-auth": "cd auth-service && npm start",
+    "start-user": "cd user-service && npm start",
+    "start-interview": "cd interview-service && npm start"
+  },
+  "keywords": [
+    "microservices",
+    "nodejs",
+    "express",
+    "mongodb",
+    "jwt",
+    "authentication"
+  ],
+  "author": "",
+  "license": "ISC"
+}

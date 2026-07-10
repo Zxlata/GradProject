@@ -1,0 +1,654 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   AI Interview Simulator — Global Stylesheet
+   Theme strategy: Bootstrap 5.3 native data-bs-theme + CSS custom properties.
+   Set data-bs-theme="dark" on <html> to flip Bootstrap AND our custom classes.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Semantic design tokens ────────────────────────────────────────────────── */
+:root {
+  --color-bg-page:        #eff6ff;
+  --color-bg-page-to:     #f3e8ff;
+  --color-bg-page-end:    #ffffff;
+  --color-bg-soft-from:   #e0e7ff;
+  --color-bg-soft-to:     #ddd6fe;
+  --color-card-bg:        #ffffff;
+  --color-border:         #e5e7eb;
+  --color-border-light:   #f3f4f6;
+  --color-border-hover:   #e5e7ff;
+  --color-text-muted:     #9ca3af;
+  --color-shadow:         rgba(99, 102, 241, 0.1);
+  --color-upload-bg:      #f9fafb;
+  --color-stat-bg:        #ffffff;
+  --color-dot-inactive:   #e5e7eb;
+  --color-step-inactive:  #e5e7eb;
+  --color-step-text:      #9ca3af;
+  --color-scrollbar-track:#f1f1f1;
+  --color-scrollbar-thumb:#c1c1c1;
+  --color-scrollbar-hover:#a1a1a1;
+  --color-nav-link:       #6b7280;
+  --color-footer-link:    #9ca3af;
+  --color-btn-social-bg:  #ffffff;
+  --color-btn-social-text:#1f2937;
+  --color-input-icon:     #9ca3af;
+  --color-inner-card:     #ffffff;
+  --color-timeline:       #e5e7eb;
+  --color-listening-bg:   #d1fae5;
+  --color-listening-text: #065f46;
+}
+
+[data-bs-theme="dark"] {
+  --color-bg-page:        #060c18;
+  --color-bg-page-to:     #0f0a1f;
+  --color-bg-page-end:    #0d1117;
+  --color-bg-soft-from:   rgba(99, 102, 241, 0.12);
+  --color-bg-soft-to:     rgba(139, 92, 246, 0.12);
+  --color-card-bg:        #1e293b;
+  --color-border:         #334155;
+  --color-border-light:   #1e293b;
+  --color-border-hover:   rgba(99, 102, 241, 0.5);
+  --color-text-muted:     #64748b;
+  --color-shadow:         rgba(99, 102, 241, 0.2);
+  --color-upload-bg:      #1e293b;
+  --color-stat-bg:        #1e293b;
+  --color-dot-inactive:   #334155;
+  --color-step-inactive:  #334155;
+  --color-step-text:      #475569;
+  --color-scrollbar-track:#0f172a;
+  --color-scrollbar-thumb:#334155;
+  --color-scrollbar-hover:#475569;
+  --color-nav-link:       #94a3b8;
+  --color-footer-link:    #475569;
+  --color-btn-social-bg:  #1e293b;
+  --color-btn-social-text:#f1f5f9;
+  --color-input-icon:     #64748b;
+  --color-inner-card:     #1e293b;
+  --color-timeline:       #334155;
+  --color-listening-bg:   rgba(16, 185, 129, 0.15);
+  --color-listening-text: #6ee7b7;
+}
+
+/* ── Smooth transitions across theme switches ───────────────────────────────── */
+*,
+*::before,
+*::after {
+  transition:
+    background-color 0.25s ease,
+    border-color     0.25s ease,
+    box-shadow       0.25s ease,
+    color            0.1s  ease;
+}
+/* Exempt transforms and opacity from the blanket transition */
+.pulse,
+.btn,
+.btn-gradient,
+.card-hover,
+.feature-card,
+.testimonial-card {
+  transition:
+    background-color 0.25s ease,
+    border-color     0.25s ease,
+    box-shadow       0.25s ease,
+    color            0.1s  ease,
+    transform        0.3s  ease,
+    opacity          0.3s  ease;
+}
+
+/* ── Gradient backgrounds ────────────────────────────────────────────────── */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.bg-gradient-secondary {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+}
+
+.bg-gradient-soft {
+  background: linear-gradient(
+    135deg,
+    var(--color-bg-soft-from) 0%,
+    var(--color-bg-soft-to)   100%
+  );
+}
+
+.bg-gradient-page {
+  background: linear-gradient(
+    to bottom right,
+    var(--color-bg-page),
+    var(--color-bg-page-to),
+    var(--color-bg-page-end)
+  );
+  min-height: 100vh;
+}
+
+/* ── Gradient text ───────────────────────────────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Card hover ──────────────────────────────────────────────────────────── */
+.card-hover {
+  border: 2px solid var(--color-border);
+}
+.card-hover:hover {
+  border-color: #6366f1;
+  box-shadow: 0 10px 25px var(--color-shadow);
+}
+
+/* ── Gradient button ─────────────────────────────────────────────────────── */
+.btn-gradient {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border: none;
+  color: white !important;
+}
+.btn-gradient:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+  color: white !important;
+}
+.btn-gradient:active {
+  transform: translateY(0);
+}
+.btn-gradient:focus-visible {
+  outline: 2px solid #a78bfa;
+  outline-offset: 2px;
+}
+
+/* ── Icon circles ────────────────────────────────────────────────────────── */
+.icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-circle-lg {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+/* ── Sticky navbar with blur ─────────────────────────────────────────────── */
+.navbar-blur {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(255, 255, 255, 0.82) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+[data-bs-theme="dark"] .navbar-blur {
+  background-color: rgba(10, 12, 24, 0.86) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ── Bootstrap bg-white / bg-light fix for dark mode ───────────────────── */
+/* bg-white stays white by Bootstrap design; remap to body bg in dark mode  */
+[data-bs-theme="dark"] .bg-white {
+  background-color: var(--bs-body-bg) !important;
+}
+/* bg-light is also light-only; remap to the secondary surface token */
+[data-bs-theme="dark"] .bg-light {
+  background-color: var(--color-upload-bg) !important;
+}
+[data-bs-theme="dark"] .shadow-sm {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+}
+[data-bs-theme="dark"] .shadow-lg {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ── Full-screen loading overlay ─────────────────────────────────────────── */
+.loading-overlay {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+[data-bs-theme="dark"] .loading-overlay {
+  background: rgba(6, 12, 24, 0.88);
+}
+
+/* ── Theme-aware tinted card surfaces ───────────────────────────────────── */
+/* Used for AI Summary (blue) and Missing Keywords (amber) cards */
+.card-tint-info {
+  background-color: #f0f7ff !important;
+}
+.card-tint-warning {
+  background-color: #fffbeb !important;
+}
+[data-bs-theme="dark"] .card-tint-info {
+  background-color: rgba(99, 102, 241, 0.08) !important;
+}
+[data-bs-theme="dark"] .card-tint-warning {
+  background-color: rgba(245, 158, 11, 0.07) !important;
+}
+
+/* ── Interview page: live-status-bar & transcript preview ───────────────── */
+/* Dark-mode overrides for the embedded <style> rules in InterviewPage.jsx   */
+[data-bs-theme="dark"] .live-status-bar {
+  background: var(--color-upload-bg);
+  color: var(--bs-body-color);
+}
+[data-bs-theme="dark"] .transcript-preview {
+  background: var(--color-upload-bg);
+  color: var(--bs-body-color);
+}
+[data-bs-theme="dark"] .status-listening {
+  background: rgba(99, 102, 241, 0.15);
+  color: #a5b4fc;
+}
+[data-bs-theme="dark"] .status-speaking {
+  background: rgba(16, 185, 129, 0.15);
+  color: #6ee7b7;
+}
+
+/* ── Progress steps ──────────────────────────────────────────────────────── */
+.progress-step {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.progress-step.active {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+  transform: scale(1.05);
+}
+.progress-step.inactive {
+  background: var(--color-step-inactive);
+  color: var(--color-step-text);
+}
+.progress-step.completed {
+  background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+  font-size: 1rem;
+}
+
+/* ── Pulse ───────────────────────────────────────────────────────────────── */
+@keyframes pulse-opacity {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+@keyframes pulse-scale {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.8; transform: scale(1.05); }
+}
+.pulse {
+  animation: pulse-scale 1.5s ease-in-out infinite;
+}
+
+/* ── File upload zone ────────────────────────────────────────────────────── */
+.upload-zone {
+  border: 2px dashed var(--color-border);
+  border-radius: 12px;
+  padding: 3rem;
+  text-align: center;
+  cursor: pointer;
+  background-color: var(--color-upload-bg);
+}
+.upload-zone:hover {
+  border-color: #6366f1;
+  background-color: rgba(99, 102, 241, 0.06);
+}
+
+/* ── Progress dots ───────────────────────────────────────────────────────── */
+.progress-dots {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+.progress-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-dot-inactive);
+}
+.progress-dot.completed { background-color: #10b981; }
+.progress-dot.current   { background-color: #6366f1; width: 12px; height: 12px; }
+
+/* ── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar              { width: 8px; height: 8px; }
+::-webkit-scrollbar-track        { background: var(--color-scrollbar-track); }
+::-webkit-scrollbar-thumb        { background: var(--color-scrollbar-thumb); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover  { background: var(--color-scrollbar-hover); }
+
+/* ── Card with gradient border ───────────────────────────────────────────── */
+.card-gradient-border {
+  position: relative;
+  border-radius: 12px;
+  padding: 2px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+}
+.card-gradient-border-inner {
+  background: var(--color-inner-card);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+/* ── Badges ──────────────────────────────────────────────────────────────── */
+.badge-gradient {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ── Form input icon ─────────────────────────────────────────────────────── */
+.input-with-icon { position: relative; }
+.input-with-icon input { padding-left: 2.5rem; }
+.input-with-icon .input-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-input-icon);
+}
+
+/* ── Stat card ───────────────────────────────────────────────────────────── */
+.stat-card {
+  background: var(--color-stat-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 2px solid var(--color-border-light);
+}
+.stat-card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: 0 4px 12px var(--color-shadow);
+}
+
+/* ── Interview type card ─────────────────────────────────────────────────── */
+.interview-type-card {
+  border: 2px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  cursor: pointer;
+  background: var(--color-card-bg);
+}
+.interview-type-card:hover {
+  border-color: #6366f1;
+  background-color: rgba(99, 102, 241, 0.06);
+}
+.interview-type-card.active {
+  border-color: #6366f1;
+  background-color: rgba(99, 102, 241, 0.1);
+}
+
+/* ── Score circle ────────────────────────────────────────────────────────── */
+.score-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 3rem;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+}
+
+/* ── Avatar ──────────────────────────────────────────────────────────────── */
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+.avatar-sm { width: 40px; height: 40px; font-size: 1rem; }
+
+/* ── Strength / weakness markers ─────────────────────────────────────────── */
+.strength-item {
+  border-left: 4px solid #10b981;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}
+.weakness-item {
+  border-left: 4px solid #f59e0b;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* ── Question feedback cards ─────────────────────────────────────────────── */
+.question-feedback-card {
+  border: 2px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+.question-feedback-card.high-score {
+  border-color: #10b981;
+  background-color: rgba(16, 185, 129, 0.06);
+}
+.question-feedback-card.low-score {
+  border-color: #f59e0b;
+  background-color: rgba(245, 158, 11, 0.06);
+}
+[data-bs-theme="dark"] .question-feedback-card.high-score {
+  background-color: rgba(16, 185, 129, 0.08);
+}
+[data-bs-theme="dark"] .question-feedback-card.low-score {
+  background-color: rgba(245, 158, 11, 0.08);
+}
+
+/* ── Timeline ────────────────────────────────────────────────────────────── */
+.timeline-connector {
+  width: 2px;
+  height: 30px;
+  background: var(--color-timeline);
+  margin: 0 auto;
+}
+
+/* ── Bootstrap overrides ─────────────────────────────────────────────────── */
+.form-control { border-radius: 8px; }
+.btn          { border-radius: 8px; font-weight: 600; }
+.card         { border-radius: 12px; }
+
+/* ── Testimonial card ────────────────────────────────────────────────────── */
+.testimonial-card {
+  background: var(--color-card-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  border: 2px solid var(--color-border-light);
+  height: 100%;
+}
+.testimonial-card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: 0 10px 25px var(--color-shadow);
+}
+
+/* ── Social login button ─────────────────────────────────────────────────── */
+.btn-social {
+  border: 2px solid var(--color-border);
+  background: var(--color-btn-social-bg);
+  color: var(--color-btn-social-text);
+  font-weight: 600;
+}
+.btn-social:hover {
+  border-color: #6366f1;
+  background-color: rgba(99, 102, 241, 0.06);
+  color: #6366f1;
+}
+[data-bs-theme="dark"] .btn-social:hover {
+  color: #a78bfa;
+}
+
+/* ── Feature card ────────────────────────────────────────────────────────── */
+.feature-card {
+  text-align: center;
+  padding: 2rem;
+  background: var(--color-card-bg);
+  border-radius: 12px;
+  border: 2px solid var(--color-border-light);
+  height: 100%;
+}
+.feature-card:hover {
+  border-color: var(--color-border-hover);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px var(--color-shadow);
+}
+
+/* ── Step card ───────────────────────────────────────────────────────────── */
+.step-card { text-align: center; padding: 2rem; }
+
+/* ── Timer badge ─────────────────────────────────────────────────────────── */
+.timer-badge {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+/* ── Listening status ────────────────────────────────────────────────────── */
+.status-listening {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-listening-bg);
+  color: var(--color-listening-text);
+  padding: 0.375rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+/* ── Chart container ─────────────────────────────────────────────────────── */
+.chart-container { position: relative; height: 300px; }
+
+/* ── Nav link ────────────────────────────────────────────────────────────── */
+.nav-link-custom {
+  color: var(--color-nav-link);
+  font-weight: 600;
+}
+.nav-link-custom:hover { color: #6366f1; }
+[data-bs-theme="dark"] .nav-link-custom:hover { color: #a78bfa; }
+
+/* ── Footer links ────────────────────────────────────────────────────────── */
+.footer-link {
+  color: var(--color-footer-link);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.footer-link:hover { color: #6366f1; }
+[data-bs-theme="dark"] .footer-link:hover { color: #a78bfa; }
+
+/* ── Hero ────────────────────────────────────────────────────────────────── */
+.hero-section { padding: 5rem 0; }
+
+/* ── Theme Toggle component ──────────────────────────────────────────────── */
+.theme-toggle-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-card-bg);
+}
+
+.theme-toggle-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border: none;
+  background: transparent;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-nav-link);
+  cursor: pointer;
+  line-height: 1;
+}
+.theme-toggle-option:hover {
+  background: rgba(99, 102, 241, 0.08);
+  color: #6366f1;
+}
+[data-bs-theme="dark"] .theme-toggle-option:hover {
+  color: #a78bfa;
+}
+.theme-toggle-option.active {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: #fff !important;
+}
+.theme-toggle-option.active:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+}
+.theme-toggle-label {
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+
+.theme-toggle-btn {
+  padding: 6px 9px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-card-bg);
+  color: var(--color-nav-link);
+  line-height: 1;
+  font-size: 15px;
+  cursor: pointer;
+}
+.theme-toggle-btn:hover {
+  border-color: #6366f1;
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.06);
+}
+[data-bs-theme="dark"] .theme-toggle-btn:hover {
+  color: #a78bfa;
+  border-color: #a78bfa;
+}
+.theme-toggle-btn:focus-visible {
+  outline: 2px solid #a78bfa;
+  outline-offset: 2px;
+}
+
+/* ── Accessibility focus rings ───────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+[data-bs-theme="dark"] :focus-visible {
+  outline-color: #a78bfa;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero-section { padding: 3rem 0; }
+  .score-circle { width: 120px; height: 120px; font-size: 2.5rem; }
+  .avatar       { width: 100px;  height: 100px;  font-size: 2rem; }
+  .theme-toggle-label { display: none; }
+}

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#6366f1" />
+  <title>You're Offline — AI Interview Simulator</title>
+  <style>
+    /* ── Reset / base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Design tokens — light default ── */
+    :root {
+      --bg:        #f1f5f9;
+      --card:      #ffffff;
+      --border:    #e2e8f0;
+      --text:      #0f172a;
+      --sub:       #475569;
+      --muted:     #94a3b8;
+      --purple:    #6366f1;
+      --purple2:   #8b5cf6;
+      --shadow:    rgba(99,102,241,0.12);
+    }
+
+    /* ── Dark mode (OS preference) ── */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:     #0f172a;
+        --card:   #1e293b;
+        --border: #334155;
+        --text:   #f1f5f9;
+        --sub:    #cbd5e1;
+        --muted:  #64748b;
+        --shadow: rgba(0,0,0,0.4);
+      }
+    }
+
+    /* ── Layout ── */
+    html, body { height: 100%; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                   Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px var(--shadow);
+    }
+
+    /* ── Brand row ── */
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 2rem;
+      text-decoration: none;
+    }
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .brand-icon svg { width: 24px; height: 24px; }
+    .brand-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Illustration ── */
+    .illustration {
+      margin: 0 auto 2rem;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg,
+        rgba(99,102,241,0.12) 0%,
+        rgba(139,92,246,0.12) 100%);
+      border: 2px solid rgba(99,102,241,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .illustration svg { width: 48px; height: 48px; }
+
+    /* ── Text ── */
+    h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: .6rem; }
+    .subtitle {
+      color: var(--sub);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 1.5rem 0;
+    }
+
+    /* ── Tips ── */
+    .tips-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+    .tips {
+      display: flex;
+      flex-direction: column;
+      gap: .7rem;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+    .tip {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.875rem;
+      color: var(--sub);
+    }
+    .tip-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 0.7rem 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(99,102,241,0.35);
+    }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--purple);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .btn-secondary:hover {
+      border-color: var(--purple);
+      background: rgba(99,102,241,0.06);
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── Status badge ── */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(239,68,68,0.1);
+      color: #ef4444;
+      border: 1px solid rgba(239,68,68,0.25);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #ef4444;
+      animation: blink 1.4s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.2; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <!-- Brand -->
+    <div class="brand">
+      <div class="brand-icon">
+        <!-- Brain SVG (inline, no external dependency) -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9.5 2a2.5 2.5 0 0 1 0 5H9a3 3 0 0 0 0 6h.5a2.5 2.5 0 0 1 0 5"/>
+          <path d="M14.5 2a2.5 2.5 0 0 0 0 5H15a3 3 0 0 1 0 6h-.5a2.5 2.5 0 0 0 0 5"/>
+          <line x1="12" y1="2" x2="12" y2="22"/>
+        </svg>
+      </div>
+      <span class="brand-name">AI Interview Simulator</span>
+    </div>
+
+    <!-- Status badge -->
+    <div class="status">
+      <span class="status-dot"></span>
+      No Internet Connection
+    </div>
+
+    <!-- Illustration -->
+    <div class="illustration">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 24C6 14.06 14.06 6 24 6" stroke="#6366f1" stroke-width="3.5"
+              stroke-linecap="round" stroke-dasharray="6 4"/>
+        <path d="M42 24C42 33.94 33.94 42 24 42" stroke="#8b5cf6" stroke-width="3.5"
+              stroke-linecap="round" stroke-dasharray="6 4"/>
+        <circle cx="24" cy="24" r="8" fill="rgba(99,102,241,0.15)"
+                stroke="#6366f1" stroke-width="2.5"/>
+        <path d="M21 24l2 2 4-4" stroke="#6366f1" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16 8L8 16M8 8l8 8" stroke="#ef4444" stroke-width="3"
+              stroke-linecap="round" transform="translate(28,28) scale(0.5)"/>
+      </svg>
+    </div>
+
+    <h1>You're Offline</h1>
+    <p class="subtitle">
+      It looks like you've lost your internet connection.
+      Please check your network and try again.
+    </p>
+
+    <div class="divider"></div>
+
+    <p class="tips-title">What you can do</p>
+    <ul class="tips">
+      <li class="tip">
+        <span class="tip-dot"></span>
+        Check your Wi-Fi or mobile data connection.
+      </li>
+      <li class="tip">
+        <span class="tip-dot"></span>
+        If you were mid-interview, your progress is saved locally and will sync when you reconnect.
+      </li>
+      <li class="tip">
+        <span class="tip-dot"></span>
+        Previously visited pages may still be available from cache.
+      </li>
+    </ul>
+
+    <div class="actions">
+      <button class="btn-primary" onclick="window.location.reload()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2.5" stroke-linecap="round">
+          <path d="M23 4v6h-6"/><path d="M1 20v-6h6"/>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+        </svg>
+        Try Again
+      </button>
+      <a class="btn-secondary" href="/">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2.5" stroke-linecap="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        Go Home
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Auto-reload when connection is restored
+    window.addEventListener('online', () => window.location.reload());
+  </script>
+</body>
+</html>

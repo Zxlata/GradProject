@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Full-bleed background (maskable  no rounded corners) -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Brain (scaled down ~70% to keep inside the safe zone circle) -->
+  <g transform="translate(256,256) scale(0.72)" fill="none" stroke="white" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-10,-80 C-10,-80 -85,-80 -115,-40 C-140,-5 -130,35 -110,60
+             C-90,85 -55,95 -35,90 C-20,87 -10,78 -10,65"/>
+    <path d="M10,-80 C10,-80 85,-80 115,-40 C140,-5 130,35 110,60
+             C90,85 55,95 35,90 C20,87 10,78 10,65"/>
+    <line x1="0" y1="-65" x2="0" y2="70"/>
+    <path d="M-40,-50 C-70,-30 -75,10 -55,30"/>
+    <path d="M-70,10 C-85,30 -80,55 -60,65"/>
+    <path d="M40,-50 C70,-30 75,10 55,30"/>
+    <path d="M70,10 C85,30 80,55 60,65"/>
+    <circle cx="-90" cy="-10" r="9" fill="white" stroke="none"/>
+    <circle cx="90"  cy="-10" r="9" fill="white" stroke="none"/>
+    <circle cx="-60" cy="55"  r="7" fill="white" stroke="none"/>
+    <circle cx="60"  cy="55"  r="7" fill="white" stroke="none"/>
+    <circle cx="0"   cy="-90" r="9" fill="white" stroke="none"/>
+  </g>
+</svg>
